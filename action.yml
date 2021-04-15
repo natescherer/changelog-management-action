@@ -53,7 +53,7 @@ runs:
           Write-Host "You cannot use 'addchangevalue' without mode 'addchange'."
           throw "Input validation error."
         }
-        if (("${{ inputs.mode }}" -eq "addchange") -and ((!"${{ inputs.addchangevalue }}") -or (!"${{ inputs.addchangetype }}")) {
+        if (("${{ inputs.mode }}" -eq "addchange") -and ((!"${{ inputs.addchangevalue }}") -or (!"${{ inputs.addchangetype }}"))) {
           Write-Host "Mode 'addchange' requires inputs 'addchangetype' and 'addchangevalue'."
           throw "Input validation error."
         }
