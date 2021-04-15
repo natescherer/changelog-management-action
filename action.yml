@@ -66,7 +66,7 @@ runs:
       run: |
         Write-Host "Installing ChangelogManagement PowerShell Module..."
 
-        Add-PSRepository -Name PoshTestGallery -SourceLocation "https://www.poshtestgallery.com/api/v2/" -InstallationPolicy Trusted
+        Register-PSRepository -Name PoshTestGallery -SourceLocation "https://www.poshtestgallery.com/api/v2/" -InstallationPolicy Trusted
 
         Install-Module -Name ChangelogManagement -Repository PoshTestGallery -AllowPrerelease
       shell: pwsh
