@@ -1,0 +1,104 @@
+name: Changelog Management
+description: |
+  Provides management tasks for changelogs in Keep a Changelog 1.0.0 format, 
+  including updating for a release, reading data, and adding new changes.
+branding:
+  icon: list
+  color: purple
+inputs:
+  path:
+    description: |
+      Path to relative to the root of the project to a CHANGELOG.md file in Keep a 
+      Changelog 1.0.0 format. Defaults to CHANGELOG.md in the root of the project.
+    required: false
+  mode:
+    description: |
+      Mode for the action. Should be one of `readdata`, `release`, or `addchange`. 
+      Defaults to 'readdata'.
+    required: false
+  releaseversion:
+    description: |
+      Version number to use when updating a changelog for release. Only valid for mode 
+      `release`.
+    required: false
+  addchangetype:
+    description: |
+      Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, 
+      `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
+    required: false
+  addchangevalue:
+    description: |
+      Data for the change to add. Should be a single line string.  Only valid for 
+      mode `addchange`.
+    required: false
+outputs:
+  lastversion:
+    description: |
+      The version number of the latest release in the changelog.
+    value: ${{ steps.readdata.outputs.lastversion }}
+  releasenotes:
+    description: |
+      Release notes composed of changes from the most recent release.
+    value: ${{ steps.readdata.outputs.releasenotes }}
+runs:
+  using: composite
+  steps:
+    - name: Validate Inputs
+      run: |
+        if (("${{ inputs.mode }}" -ne "addchange") -and ("${{ inputs.addchangetype }}")) {
+          Write-Host "You cannot use 'addchangetype' without mode 'addchange'."
+          throw "Input validation error."
+        }
+        if (("${{ inputs.mode }}" -ne "addchange") -and ("${{ inputs.addchangevalue }}")) {
+          Write-Host "You cannot use 'addchangevalue' without mode 'addchange'."
+          throw "Input validation error."
+        }
+        if (("${{ inputs.mode }}" -eq "addchange") -and ((!"${{ inputs.addchangevalue }}") -or (!"${{ inputs.addchangetype }}")) {
+          Write-Host "Mode 'addchange' requires inputs 'addchangetype' and 'addchangevalue'."
+          throw "Input validation error."
+        }
+        if (("${{ inputs.mode }}" -eq "release") -and (!"${{ inputs.releaseversion }}")) {
+          Write-Host "Mode 'release' requires input 'releaseversion'."
+          throw "Input validation error."
+        }
+      shell: pwsh
+    - name: Install Module
+      run: |
+        Write-Host "Installing ChangelogManagement PowerShell Module..."
+
+        Add-PSRepository -Name PoshTestGallery -SourceLocation "https://www.poshtestgallery.com/api/v2/" -InstallationPolicy Trusted
+
+        Install-Module -Name ChangelogManagement -Repository PoshTestGallery -AllowPrerelease
+      shell: pwsh
+    - name: Add Change
+      run: |
+        if (("${{ inputs.mode }}" -eq "addchange") {
+          Write-Host "Adding Change..."
+
+          $ResolvedPath = "${{ github.workspace }}\${{ inputs.path }}"
+
+          Add-ChangelogData -Path $ResolvedPath -Type "${{ inputs.addchangetype }}" -Value "${{ inputs.addchangevalue }}"
+        }
+      shell: pwsh
+    - name: Release
+      run: |
+        if (("${{ inputs.mode }}" -eq "release") {
+          Write-Host "Updating changelog for release..."
+
+          $ResolvedPath = "${{ github.workspace }}\${{ inputs.path }}"
+
+          Update-Changelog -Path $ResolvedPath -ReleaseVersion "${{ inputs.releaseversion }}" -LinkMode "GitHub"
+        }
+      shell: pwsh
+    - name: Read Data
+      id: readdata
+      run: |
+        Write-Host "Reading changelog data..."
+
+        $ResolvedPath = "${{ github.workspace }}\${{ inputs.path }}"
+
+        $Data = Get-ChangelogData -Path $ResolvedPath
+
+        echo "::set-output name=lastversion::$($Data.LastVersion)"
+        echo "::set-output name=releasenotes::$($Data.ReleaseNotes)"
+      shell: pwsh
