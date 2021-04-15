@@ -13,10 +13,10 @@ Describe 'mode readdata' {
 
 Describe 'mode release' {
     It 'lastversion' {
-        $env:READ_LASTVERSION | Should -Be "2.0.0"
+        $env:RELEASE_LASTVERSION | Should -Be "2.0.0"
     }
     It 'releasenotes' {
-        $env:READ_RELEASENOTES | Should -Be ("### Added$NL" +
+        $env:RELEASE_RELEASENOTES | Should -Be ("### Added$NL" +
             "- Unreleased Addition 1$NL" +
             "- Unreleased Addition 2")
     }
