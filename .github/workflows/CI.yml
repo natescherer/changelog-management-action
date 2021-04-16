@@ -28,16 +28,12 @@ jobs:
           path: test\CHANGELOG2.md
           mode: release
           releaseversion: 2.0.0
-      - name: Map Outputs to env vars
+      - name: Map Outputs to files
         run: |
-          $ReadLastVersion = "${{ steps.readdata.outputs.lastversion }}"
-          echo "READ_LASTVERSION=$ReadLastVersion" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-          $ReadReleaseNotes = "${{ steps.readdata.outputs.releasenotes }}"
-          echo "READ_RELEASENOTES=$ReadReleaseNotes" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-          $ReleaseLastVersion = "${{ steps.release.outputs.lastversion }}"
-          echo "RELEASE_LASTVERSION=$ReleaseLastVersion" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-          $ReleaseReleaseNotes = "${{ steps.release.outputs.releasenotes }}"
-          echo "RELEASE_RELEASENOTES=$ReleaseReleaseNotes" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+          "${{ steps.readdata.outputs.lastversion }}" | Out-File -FilePath "${{ github.action_path }}\test\read_lastversion.txt"
+          "${{ steps.readdata.outputs.releasenotes }}" | Out-File -FilePath "${{ github.action_path }}\test\read_releasenotes.txt"
+          "${{ steps.release.outputs.lastversion }}" | Out-File -FilePath ${{ github.action_path }}\test\release_lastversion.txt"
+          "${{ steps.release.outputs.releasenotes }}" | Out-File -FilePath "${{ github.action_path }}\test\release_releasenotes.txt"
       - name: Run Pester Tests
         id: pester
         uses: natescherer/pester-tests-report@feature/code-coverage
