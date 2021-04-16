@@ -4,7 +4,7 @@ description: |
   including updating for a release, reading data, and adding new changes.
 branding:
   icon: list
-  color: purple
+  color: yellow
 inputs:
   path:
     description: |
@@ -14,19 +14,19 @@ inputs:
   mode:
     description: |
       Mode for the action. Should be one of `readdata`, `release`, or `addchange`. 
-      Defaults to 'readdata'.
+      Defaults to `readdata`.
     required: false
   releaseversion:
     description: |
       Version number to use when updating a changelog for release. Only valid for mode 
       `release`.
     required: false
-  addchangetype:
+  changetype:
     description: |
       Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, 
       `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
     required: false
-  addchangevalue:
+  changevalue:
     description: |
       Data for the change to add. Should be a single line string.  Only valid for 
       mode `addchange`.
@@ -45,16 +45,16 @@ runs:
   steps:
     - name: Validate Inputs
       run: |
-        if (("${{ inputs.mode }}" -ne "addchange") -and ("${{ inputs.addchangetype }}")) {
-          Write-Host "You cannot use 'addchangetype' without mode 'addchange'."
+        if (("${{ inputs.mode }}" -ne "addchange") -and ("${{ inputs.changetype }}")) {
+          Write-Host "You cannot use 'changetype' without mode 'addchange'."
           throw "Input validation error."
         }
-        if (("${{ inputs.mode }}" -ne "addchange") -and ("${{ inputs.addchangevalue }}")) {
-          Write-Host "You cannot use 'addchangevalue' without mode 'addchange'."
+        if (("${{ inputs.mode }}" -ne "addchange") -and ("${{ inputs.changevalue }}")) {
+          Write-Host "You cannot use 'changevalue' without mode 'addchange'."
           throw "Input validation error."
         }
-        if (("${{ inputs.mode }}" -eq "addchange") -and ((!"${{ inputs.addchangevalue }}") -or (!"${{ inputs.addchangetype }}"))) {
-          Write-Host "Mode 'addchange' requires inputs 'addchangetype' and 'addchangevalue'."
+        if (("${{ inputs.mode }}" -eq "addchange") -and ((!"${{ inputs.changevalue }}") -or (!"${{ inputs.changetype }}"))) {
+          Write-Host "Mode 'addchange' requires inputs 'changetype' and 'changevalue'."
           throw "Input validation error."
         }
         if (("${{ inputs.mode }}" -eq "release") -and (!"${{ inputs.releaseversion }}")) {
@@ -77,7 +77,7 @@ runs:
 
           $ResolvedPath = "${{ github.workspace }}\${{ inputs.path }}"
 
-          Add-ChangelogData -Path $ResolvedPath -Type "${{ inputs.addchangetype }}" -Value "${{ inputs.addchangevalue }}"
+          Add-ChangelogData -Path $ResolvedPath -Type "${{ inputs.changetype }}" -Value "${{ inputs.changevalue }}"
         }
       shell: pwsh
     - name: Release
@@ -99,6 +99,11 @@ runs:
 
         $Data = Get-ChangelogData -Path $ResolvedPath
 
-        echo "::set-output name=lastversion::$($Data.LastVersion)"
-        echo "::set-output name=releasenotes::$($Data.ReleaseNotes)"
+        . "${{ github.action_path }}\src\ConvertTo-ActionsEscapedString.ps1"
+
+        $SafeVersion = ConvertTo-ActionsEscapedString -String $Data.LastVersion
+        $SafeNotes = ConvertTo-ActionsEscapedString -String $Data.ReleaseNotes
+
+        echo "::set-output name=lastversion::$SafeVersion"
+        echo "::set-output name=releasenotes::$SafeNotes"
       shell: pwsh
