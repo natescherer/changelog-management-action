@@ -52,7 +52,8 @@ runs:
         "INPUT_RELEASEVERSION=${{ inputs.releaseversion }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf-8 -Append
         "INPUT_CHANGETYPE=${{ inputs.changetype }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf-8 -Append
         "INPUT_CHANGEVALUE=${{ inputs.changevalue }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf-8 -Append
-        Write-Host $env:GITHUB_ENV
+        $FileData = Get-Content $env:GITHUB_ENV
+        Write-Host $FileData
       shell: pwsh
     - name: Validate Inputs
       id: validateinputs
