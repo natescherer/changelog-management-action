@@ -45,27 +45,26 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Send Inputs to env
-      run: |
-        . "$env:GITHUB_ACTION_PATH\src\functions\Set-ActionsEnvironmentVariable.ps1"
-
-        Set-ActionsEnvironmentVariable -Name "INPUT_PATH" -Value "${{ inputs.path }}"
-        Set-ActionsEnvironmentVariable -Name "INPUT_MODE" -Value "${{ inputs.mode }}"
-        Set-ActionsEnvironmentVariable -Name "INPUT_RELEASEVERSION" -Value "${{ inputs.releaseversion }}"
-        Set-ActionsEnvironmentVariable -Name "INPUT_CHANGETYPE" -Value "${{ inputs.changetype }}"
-        Set-ActionsEnvironmentVariable -Name "INPUT_CHANGEVALUE" -Value "${{ inputs.changevalue }}"
-
-        $FileData = Get-Content $env:GITHUB_ENV
-        Write-Host $FileData
-      shell: pwsh
     - name: Validate Inputs
       id: validateinputs
       run: . "$env:GITHUB_ACTION_PATH\src\steps\1_validateinputs.ps1"
       shell: pwsh
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
+        INPUT_CHANGETYPE: ${{ inputs.changetype }}
+        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
     - name: Install Module
       id: installmodule
       run: . "$env:GITHUB_ACTION_PATH\src\steps\2_installmodule.ps1"
       shell: pwsh
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
+        INPUT_CHANGETYPE: ${{ inputs.changetype }}
+        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
     - name: Add Change
       id: addchange
       run: |
@@ -73,6 +72,12 @@ runs:
           . "$env:GITHUB_ACTION_PATH\src\steps\3_addchange.ps1"
         }
       shell: pwsh
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
+        INPUT_CHANGETYPE: ${{ inputs.changetype }}
+        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
     - name: Release
       id: release
       run: |
@@ -80,7 +85,19 @@ runs:
           . "$env:GITHUB_ACTION_PATH\src\steps\4_release.ps1"
         }
       shell: pwsh
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
+        INPUT_CHANGETYPE: ${{ inputs.changetype }}
+        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
     - name: Read Data
       id: readdata
       run: . "$env:GITHUB_ACTION_PATH\src\steps\5_readdata.ps1"
       shell: pwsh
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
+        INPUT_CHANGETYPE: ${{ inputs.changetype }}
+        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
