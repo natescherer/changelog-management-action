@@ -63,11 +63,17 @@ runs:
       shell: pwsh
     - name: Add Change
       id: addchange
-      run: . "$env:GITHUB_ACTION_PATH\src\steps\3_addchange.ps1"
+      run: |
+        if ($env:INPUT_MODE -eq "addchange") {
+          . "$env:GITHUB_ACTION_PATH\src\steps\3_addchange.ps1"
+        }
       shell: pwsh
     - name: Release
       id: release
-      run: . "$env:GITHUB_ACTION_PATH\src\steps\4_release.ps1"
+      run: |
+        if ($env:INPUT_MODE -eq "release") {
+          . "$env:GITHUB_ACTION_PATH\src\steps\4_release.ps1"
+        }
       shell: pwsh
     - name: Read Data
       id: readdata
