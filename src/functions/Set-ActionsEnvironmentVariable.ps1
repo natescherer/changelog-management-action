@@ -7,7 +7,7 @@ function Set-ActionsEnvironmentVariable {
         [string]$Value
     )
 
-    Set-Variable -Name "env:$Name" -Value $Value
+    Set-Item -Path "env:$Name" -Value $Value
 
     Out-File -InputObject "$Name=$Value" -FilePath $env:GITHUB_ENV -Encoding utf-8 -Append
 }
