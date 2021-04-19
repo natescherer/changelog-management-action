@@ -71,5 +71,5 @@ runs:
       shell: pwsh
     - name: Read Data
       id: readdata
-      run: . "$env:GITHUB_ACTION_PATH\src\steps\4_readdata.ps1"
+      run: . "$env:GITHUB_ACTION_PATH\src\steps\5_readdata.ps1"
       shell: pwsh

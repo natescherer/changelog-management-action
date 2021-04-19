@@ -6,7 +6,7 @@ if (($env:INPUT_MODE -ne "addchange") -and $env:INPUT_CHANGEVALUE) {
     Write-Host "You cannot use 'changevalue' without mode 'addchange'."
     throw "Input validation error."
 }
-if (($env:INPUT_MODE -eq "addchange") -and (!$env:INPUT_CHANGEVALUE) -or (!$env:INPUT_CHANGETYPE)) {
+if (($env:INPUT_MODE -eq "addchange") -and ((!$env:INPUT_CHANGEVALUE) -or (!$env:INPUT_CHANGETYPE))) {
     Write-Host "Mode 'addchange' requires inputs 'changetype' and 'changevalue'."
     throw "Input validation error."
 }
