@@ -3,7 +3,7 @@ function Set-ActionsEnvironmentVariable {
     param(
         [parameter(Mandatory = $true)]
         [string]$Name,
-        [parameter(Mandatory = $true)]
+        [parameter(Mandatory = $false)]
         [string]$Value
     )
 
