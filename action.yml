@@ -55,21 +55,21 @@ runs:
       shell: pwsh
     - name: Validate Inputs
       id: validateinputs
-      run: src\steps\1_validateinputs.ps1
+      run: $env:GITHUB_ACTION_PATH\src\steps\1_validateinputs.ps1
       shell: pwsh
     - name: Install Module
       id: installmodule
-      run: src\steps\2_installmodule.ps1
+      run: $env:GITHUB_ACTION_PATH\src\steps\2_installmodule.ps1
       shell: pwsh
     - name: Add Change
       id: addchange
-      run: src\steps\3_addchange.ps1
+      run: $env:GITHUB_ACTION_PATH\src\steps\3_addchange.ps1
       shell: pwsh
     - name: Release
       id: release
-      run: src\steps\4_release.ps1
+      run: $env:GITHUB_ACTION_PATH\src\steps\4_release.ps1
       shell: pwsh
     - name: Read Data
       id: readdata
-      run: src\steps\4_readdata.ps1
+      run: $env:GITHUB_ACTION_PATH\src\steps\4_readdata.ps1
       shell: pwsh
