@@ -39,17 +39,18 @@ jobs:
         uses: zyborg/pester-tests-report@v1
         if: github.event_name != 'pull_request'
         with:
-          report_name: TestResults_${{ runner.os }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          report_name: TestResults_${{ runner.os }}
+          tests_fail_step: true
           gist_name: ${{ env.BARE_REPOSITORY }}_TestResults_${{ runner.os }}.md
           gist_badge_label: ${{ runner.os }}
           gist_token: ${{ secrets.PESTER_GIST_TOKEN }}
-          tests_fail_step: true
       - name: Run Pester Tests (PR)
         id: pester-pr
         uses: zyborg/pester-tests-report@v1
         if: github.event_name == 'pull_request'
         with:
-          report_name: TestResults_${{ runner.os }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          report_name: TestResults_${{ runner.os }}
+          skip_check_run: true
           tests_fail_step: true
