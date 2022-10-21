@@ -35,7 +35,7 @@ jobs:
           "${{ steps.release.outputs.lastversion }}" | Out-File -FilePath "${{ github.workspace }}\test\release_lastversion.txt" -NoNewLine
           "${{ steps.release.outputs.releasenotes }}" | Out-File -FilePath "${{ github.workspace }}\test\release_releasenotes.txt" -NoNewLine
       - name: Run Pester Tests (non-PR)
-        id: pester
+        id: pester-non-pr
         uses: zyborg/pester-tests-report@v1
         if: github.event_name != 'pull_request'
         with:
@@ -46,7 +46,7 @@ jobs:
           gist_token: ${{ secrets.PESTER_GIST_TOKEN }}
           tests_fail_step: true
       - name: Run Pester Tests (PR)
-        id: pester
+        id: pester-pr
         uses: zyborg/pester-tests-report@v1
         if: github.event_name == 'pull_request'
         with:
