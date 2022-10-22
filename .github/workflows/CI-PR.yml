@@ -18,12 +18,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Read Data
         id: readdata
-        uses: natescherer/changelog-management-action@main
+        uses: ./
         with:
           path: test\CHANGELOG1.md
       - name: Release
         id: release
-        uses: natescherer/changelog-management-action@main
+        uses: ./
         with:
           path: test\CHANGELOG2.md
           mode: release
