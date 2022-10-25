@@ -9,5 +9,5 @@ $Data = Get-ChangelogData -Path $ResolvedPath
 $SafeVersion = ConvertTo-ActionsEscapedString -String $Data.LastVersion
 $SafeNotes = ConvertTo-ActionsEscapedString -String $Data.ReleaseNotes
 
-"lastversion=$SafeVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf-8 -Append
-"releasenotes=$SafeNotes" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf-8 -Append
+"lastVersion=$SafeVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf-8 -Append
+"releaseNotes=$SafeNotes" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf-8 -Append

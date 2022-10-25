@@ -7,41 +7,29 @@ branding:
   color: yellow
 inputs:
   path:
-    description: |
-      Path to relative to the root of the project to a CHANGELOG.md file in Keep a 
-      Changelog 1.0.0 format. Defaults to CHANGELOG.md in the root of the project.
+    description: Path to relative to the root of the project to a CHANGELOG.md file in Keep a Changelog 1.0.0 format. Defaults to CHANGELOG.md in the root of the project.
     required: false
     default: CHANGELOG.md
   mode:
-    description: |
-      Mode for the action. Should be one of `readdata`, `release`, or `addchange`. 
-      Defaults to `readdata`.
+    description: Mode for the action. Should be one of `readdata`, `release`, or `addchange`. Defaults to `readdata`.
     required: false
     default: readdata
-  releaseversion:
-    description: |
-      Version number to use when updating a changelog for release. Only valid for mode 
-      `release`.
+  releaseVersion:
+    description:  Version number to use when updating a changelog for release. Only valid for mode `release`.
     required: false
-  changetype:
-    description: |
-      Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, 
-      `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
+  changeType:
+    description: Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
     required: false
-  changevalue:
-    description: |
-      Data for the change to add. Should be a single line string.  Only valid for 
-      mode `addchange`.
+  changeValue:
+    description: Data for the change to add. Should be a single line string.  Only valid for mode `addchange`.
     required: false
 outputs:
-  lastversion:
-    description: |
-      The version number of the latest release in the changelog.
-    value: ${{ steps.readdata.outputs.lastversion }}
-  releasenotes:
-    description: |
-      Release notes composed of changes from the most recent release.
-    value: ${{ steps.readdata.outputs.releasenotes }}
+  lastVersion:
+    description: The version number of the latest release in the changelog.
+    value: ${{ steps.readdata.outputs.lastVersion }}
+  releaseNotes:
+    description: Release notes composed of changes from the most recent release.
+    value: ${{ steps.readdata.outputs.releaseNotes }}
 runs:
   using: composite
   steps:
@@ -52,9 +40,9 @@ runs:
       env:
         INPUT_PATH: ${{ inputs.path }}
         INPUT_MODE: ${{ inputs.mode }}
-        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
-        INPUT_CHANGETYPE: ${{ inputs.changetype }}
-        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseVersion }}
+        INPUT_CHANGETYPE: ${{ inputs.changeType }}
+        INPUT_CHANGEVALUE: ${{ inputs.changeValue }}
     - name: Install Module
       id: installmodule
       run: . "$env:GITHUB_ACTION_PATH\src\steps\2_installmodule.ps1"
@@ -62,9 +50,9 @@ runs:
       env:
         INPUT_PATH: ${{ inputs.path }}
         INPUT_MODE: ${{ inputs.mode }}
-        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
-        INPUT_CHANGETYPE: ${{ inputs.changetype }}
-        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseVersion }}
+        INPUT_CHANGETYPE: ${{ inputs.changeType }}
+        INPUT_CHANGEVALUE: ${{ inputs.changeValue }}
     - name: Add Change
       id: addchange
       run: |
@@ -75,9 +63,9 @@ runs:
       env:
         INPUT_PATH: ${{ inputs.path }}
         INPUT_MODE: ${{ inputs.mode }}
-        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
-        INPUT_CHANGETYPE: ${{ inputs.changetype }}
-        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseVersion }}
+        INPUT_CHANGETYPE: ${{ inputs.changeType }}
+        INPUT_CHANGEVALUE: ${{ inputs.changeValue }}
     - name: Release
       id: release
       run: |
@@ -88,9 +76,9 @@ runs:
       env:
         INPUT_PATH: ${{ inputs.path }}
         INPUT_MODE: ${{ inputs.mode }}
-        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
-        INPUT_CHANGETYPE: ${{ inputs.changetype }}
-        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseVersion }}
+        INPUT_CHANGETYPE: ${{ inputs.changeType }}
+        INPUT_CHANGEVALUE: ${{ inputs.changeValue }}
     - name: Read Data
       id: readdata
       run: . "$env:GITHUB_ACTION_PATH\src\steps\5_readdata.ps1"
@@ -98,6 +86,6 @@ runs:
       env:
         INPUT_PATH: ${{ inputs.path }}
         INPUT_MODE: ${{ inputs.mode }}
-        INPUT_RELEASEVERSION: ${{ inputs.releaseversion }}
-        INPUT_CHANGETYPE: ${{ inputs.changetype }}
-        INPUT_CHANGEVALUE: ${{ inputs.changevalue }}
+        INPUT_RELEASEVERSION: ${{ inputs.releaseVersion }}
+        INPUT_CHANGETYPE: ${{ inputs.changeType }}
+        INPUT_CHANGEVALUE: ${{ inputs.changeValue }}

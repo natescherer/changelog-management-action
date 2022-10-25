@@ -19,7 +19,7 @@ jobs:
         uses: natescherer/changelog-management-action@v1.0.0
         with:
           mode: release
-          releaseversion: 2.0.0
+          releaseVersion: 2.0.0
 ```
 
 ### Read Changelog Data
@@ -34,8 +34,8 @@ jobs:
         uses: natescherer/changelog-management-action@v1.0.0
       - name: Echo Changelog Data
         run: |
-          echo "${{ steps.readchangelog.outputs.lastversion }}"
-          echo "${{ steps.readchangelog.outputs.releasenotes }}"
+          echo "${{ steps.readchangelog.outputs.lastVersion }}"
+          echo "${{ steps.readchangelog.outputs.releaseNotes }}"
 ```
 
 ### Add New Change
@@ -49,8 +49,8 @@ jobs:
         uses: natescherer/changelog-management-action@v1.0.0
         with:
           mode: addchange
-          changetype: added
-          changevalue: Quantum entanglement
+          changeType: added
+          changeValue: Quantum entanglement
 ```
 
 ### Inputs
@@ -61,9 +61,9 @@ This Action defines the following formal inputs.
 |-|-|-|
 | **`path`** | false | Path to relative to the root of the project to a CHANGELOG.md file in Keep a Changelog 1.0.0 format. Defaults to CHANGELOG.md in the root of the project.
 | **`mode`** | false | Mode for the action. Should be one of `readdata`, `release`, or `addchange`. Defaults to `readdata`.
-| **`releaseversion`** | false | Version number to use when updating a changelog for release. Only valid for mode `release`.
-| **`changetype`** | false | Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
-| **`changevalue`** | false | Data for the change to add. Should be a single line string.  Only valid for mode `addchange`.
+| **`releaseVersion`** | false | Version number to use when updating a changelog for release. Only valid for mode `release`.
+| **`changeType`** | false | Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
+| **`changeValue`** | false | Data for the change to add. Should be a single line string.  Only valid for mode `addchange`.
 
 ### Outputs
 
@@ -71,8 +71,8 @@ This Action defines the following formal outputs.
 
 | Name | Description
 |-|-|
-| **`lastversion`** | The version number of the latest release in the changelog.
-| **`releasenotes`** | Release notes composed of changes from the most recent release.
+| **`lastVersion`** | The version number of the latest release in the changelog.
+| **`releaseNotes`** | Release notes composed of changes from the most recent release.
 
 ## Authors
 
