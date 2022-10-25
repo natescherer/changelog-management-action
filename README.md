@@ -74,9 +74,19 @@ This Action defines the following formal outputs.
 | **`lastVersion`** | The version number of the latest release in the changelog.
 | **`releaseNotes`** | Release notes composed of changes from the most recent release.
 
-## Authors
+## Contributors
 
-**Nate Scherer** - *Initial work* - [natescherer](https://github.com/natescherer)
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://allcontributors.org) specification.
+Contributions of any kind are welcome!
 
 ## License
 
