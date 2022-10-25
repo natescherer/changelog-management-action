@@ -18,12 +18,9 @@ It is tested and runs on `windows-latest`, `ubuntu-latest`, and `macos-latest`.
 ### Release
 
 ```yaml
-jobs:
-  Job:
-    runs-on: windows-latest
     steps:
       - name: Update Changelog for Release
-        uses: natescherer/changelog-management-action@v1.0.0
+        uses: natescherer/changelog-management-action@v1
         with:
           mode: release
           releaseVersion: 2.0.0
@@ -32,13 +29,10 @@ jobs:
 ### Read Changelog Data
 
 ```yaml
-jobs:
-  Job:
-    runs-on: windows-latest
     steps:
       - name: Read Changelog Data
         id: readchangelog
-        uses: natescherer/changelog-management-action@v1.0.0
+        uses: natescherer/changelog-management-action@v1
       - name: Echo Changelog Data
         run: |
           echo "${{ steps.readchangelog.outputs.lastVersion }}"
@@ -48,12 +42,9 @@ jobs:
 ### Add New Change
 
 ```yaml
-jobs:
-  Job:
-    runs-on: windows-latest
     steps:
       - name: Add Change
-        uses: natescherer/changelog-management-action@v1.0.0
+        uses: natescherer/changelog-management-action@v1
         with:
           mode: addchange
           changeType: added
@@ -62,7 +53,7 @@ jobs:
 
 ### Inputs
 
-This Action defines the following formal inputs.
+<!--(inputs-start)-->
 
 | Name | Req | Description
 |-|-|-|
@@ -72,14 +63,18 @@ This Action defines the following formal inputs.
 | **`changeType`** | false | Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
 | **`changeValue`** | false | Data for the change to add. Should be a single line string.  Only valid for mode `addchange`.
 
+<!--(inputs-end)-->
+
 ### Outputs
 
-This Action defines the following formal outputs.
+<!--(outputs-start)-->
 
 | Name | Description
 |-|-|
 | **`lastVersion`** | The version number of the latest release in the changelog.
 | **`releaseNotes`** | Release notes composed of changes from the most recent release.
+
+<!--(outputs-end)-->
 
 ## Contributors
 
