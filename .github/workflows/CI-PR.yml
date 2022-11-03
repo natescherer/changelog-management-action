@@ -20,14 +20,22 @@ jobs:
         id: readdata
         uses: ./
         with:
-          path: test\CHANGELOG1.md
+          path: test\CHANGELOG_read.md
       - name: Release
         id: release
         uses: ./
         with:
-          path: test\CHANGELOG2.md
+          path: test\CHANGELOG_release.md
           mode: release
           releaseVersion: 2.0.0
+      - name: Add Change
+        id: add
+        uses: ./
+        with:
+          path: test\CHANGELOG_add.md
+          mode: addchange
+          changeType: Added
+          changeValue: New Unreleased Addition
       - name: Map Outputs to files
         run: |
           "${{ steps.readdata.outputs.lastVersion }}" | Out-File -FilePath "${{ github.workspace }}\test\read_lastVersion.txt" -NoNewLine
