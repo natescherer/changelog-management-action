@@ -1,5 +1,5 @@
 if (!(Get-InstalledModule -Name ChangelogManagement -ErrorAction SilentlyContinue)) {
     Write-Host "Installing ChangelogManagement PowerShell Module..."
-    Register-PSRepository -Name Cloudsmith -SourceLocation "https://nuget.cloudsmith.io/natescherer/changelogmanagement/v2/" -InstallationPolicy Trusted
-    Install-Module -Name ChangelogManagement -Repository Cloudsmith -AllowPrerelease
+    Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+    Install-Module -Name ChangelogManagement
 }
