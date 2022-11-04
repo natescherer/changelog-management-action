@@ -34,12 +34,12 @@ Describe 'mode addchange' {
     It 'releaseNotes' {
         $Path = Join-Path "test" "add_releaseNotes.txt" 
         Get-Content -Path $Path -Raw | Should -Be ("### Added$NL" +
-            "- Unreleased Addition 1$NL" +
-            "- Unreleased Addition 2")
+            "- Released Addition 1$NL" +
+            "- Released Addition 2")
     }
     It 'Unreleased Section' {
         $Path = Join-Path "test" "CHANGELOG_add.md"
-        Get-Content -Path $Path -Raw | Should -Contain ("### Added$NL" +
+        Get-Content -Path $Path -Raw | Should -Match ("### Added$NL" +
             "- New Unreleased Addition$NL" +
             "- Unreleased Addition 1$NL" +
             "- Unreleased Addition 2")
