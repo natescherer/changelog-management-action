@@ -55,13 +55,13 @@ It is tested and runs on `windows-latest`, `ubuntu-latest`, and `macos-latest`.
 
 <!--(inputs-start)-->
 
-| Name | Req | Description
-|-|-|-|
-| **`path`** | false | Path to relative to the root of the project to a CHANGELOG.md file in Keep a Changelog 1.0.0 format. Defaults to CHANGELOG.md in the root of the project.
-| **`mode`** | false | Mode for the action. Should be one of `readdata`, `release`, or `addchange`. Defaults to `readdata`.
-| **`releaseVersion`** | false | Version number to use when updating a changelog for release. Only valid for mode `release`.
-| **`changeType`** | false | Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
-| **`changeValue`** | false | Data for the change to add. Should be a single line string.  Only valid for mode `addchange`.
+| Name  | Required | Default | Description |
+| :---: | :------: | :-----: | ----------- |
+| `path` | false | CHANGELOG.md | Path to relative to the root of the project to a CHANGELOG.md file in Keep a Changelog 1.0.0 format. Defaults to CHANGELOG.md in the root of the project. |
+| `mode` | false | readdata | Mode for the action. Should be one of `readdata`, `release`, or `addchange`. Defaults to `readdata`. |
+| `releaseVersion` | false |  | Version number to use when updating a changelog for release. Only valid for mode `release`. |
+| `changeType` | false |  | Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`. |
+| `changeValue` | false |  | Data for the change to add. Should be a single line string.  Only valid for mode `addchange`. |
 
 <!--(inputs-end)-->
 
@@ -69,10 +69,10 @@ It is tested and runs on `windows-latest`, `ubuntu-latest`, and `macos-latest`.
 
 <!--(outputs-start)-->
 
-| Name | Description
-|-|-|
-| **`lastVersion`** | The version number of the latest release in the changelog.
-| **`releaseNotes`** | Release notes composed of changes from the most recent release.
+| Name  | Description |
+| :---: | ----------- |
+| `lastVersion` | The version number of the latest release in the changelog. |
+| `releaseNotes` | Release notes composed of changes from the most recent release. |
 
 <!--(outputs-end)-->
 
