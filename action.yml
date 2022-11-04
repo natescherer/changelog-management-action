@@ -1,7 +1,5 @@
 name: Changelog Management
-description: |
-  Provides management tasks for changelogs in Keep a Changelog 1.0.0 format, 
-  including updating for a release, reading data, and adding new changes.
+description: Provides tasks for changelogs in Keep a Changelog 1.0.0 format, including releasing, reading, and adding new changes.
 branding:
   icon: list
   color: yellow
