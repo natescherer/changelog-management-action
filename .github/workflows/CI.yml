@@ -5,6 +5,7 @@ on:
     - '**.md'
 jobs:
   Test:
+    if: github.event.pull_request.merged != true
     runs-on: ${{ matrix.os }}
     defaults:
       run:
