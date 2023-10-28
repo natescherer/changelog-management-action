@@ -1,11 +1,8 @@
 name: CI
 on:
   push:
-    branches:
-      - main
-      - bugfix/**
-      - feature/**
-  workflow_dispatch:
+    paths-ignore:
+    - '**.md'
 jobs:
   Test:
     runs-on: ${{ matrix.os }}
@@ -52,11 +49,8 @@ jobs:
           "${{ steps.add.outputs.releaseNotes }}" | Out-File -FilePath "${{ github.workspace }}\test\add_releaseNotes.txt" -NoNewLine
       - name: Run Pester Tests
         id: pester
-        uses: zyborg/pester-tests-report@v1
+        uses: natescherer/pester-tests-report@combined
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           report_name: TestResults_${{ runner.os }}
           tests_fail_step: true
-          gist_name: ${{ env.BARE_REPOSITORY }}_TestResults_${{ runner.os }}.md
-          gist_badge_label: ${{ runner.os }}
-          gist_token: ${{ secrets.PESTER_GIST_TOKEN }}
