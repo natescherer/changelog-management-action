@@ -17,6 +17,9 @@ concurrency:
 jobs:
   Test:
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
     strategy:
       fail-fast: false
       matrix:
