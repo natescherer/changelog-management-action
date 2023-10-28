@@ -43,10 +43,6 @@ jobs:
           report_name: TestResults_${{ runner.os }}_${{ matrix.shell }}
           page_name: ${{ runner.os }}_${{ matrix.shell }}
           page_badge_label: ${{ runner.os }} ${{ matrix.shell }}
-          coverage_paths: src\private,src\public
-          coverage_report_name: CoverageResults_${{ runner.os }}_${{ matrix.shell }}
-          coverage_page: true
-          coverage_page_badge_label: Code Coverage
       - name: Upload Pages Artifact
         uses: actions/upload-artifact@v3
         with:
