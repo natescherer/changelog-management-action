@@ -2,10 +2,11 @@ name: CI
 on:
   push:
     paths-ignore:
-    - '**.md'
+      - '**.md'
+    branches-ignore:
+      - main
 jobs:
   Test:
-    if: github.event.pull_request.merged != true
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -15,9 +16,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - name: Set Variables
-        run: |
-          "BARE_REPOSITORY=$($env:GITHUB_REPOSITORY.split("/")[1])" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf-8 -Append
       - name: Checkout
         uses: actions/checkout@v4
       - name: Read Data
