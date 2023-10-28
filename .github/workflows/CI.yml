@@ -5,8 +5,10 @@ on:
       - '**.md'
     branches-ignore:
       - main
+  pull_request:
 jobs:
   Test:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.url != github.event.pull_request.base.repo.url
     runs-on: ${{ matrix.os }}
     defaults:
       run:
