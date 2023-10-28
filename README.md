@@ -1,8 +1,8 @@
 # Changelog Management GitHub Action
 
-[![Tests Windows](https://raw.githubusercontent.com/gist/natescherer/6a1fa63e8575464b14542ed4b0804de8/raw/d41383962edc421f947c63605034a24bce04c14b/changelog-management-action_TestResults_Windows.md_badge.svg)](https://gist.github.com/natescherer/6a1fa63e8575464b14542ed4b0804de8)
-[![Tests Linux](https://raw.githubusercontent.com/gist/natescherer/2c11b7439afdbb286f09c14887ba0117/raw/545f4d5d5dcc784c0415e578b415ebf980cb66b4/changelog-management-action_TestResults_Linux.md_badge.svg)](https://gist.github.com/natescherer/2c11b7439afdbb286f09c14887ba0117)
-[![Tests macOS](https://raw.githubusercontent.com/gist/natescherer/7ca0b83966d78656c800de79b0aba983/raw/cf80a5bca86c91ee2bcce141b89ea2980714d2f8/changelog-management-action_TestResults_macOS.md_badge.svg)](https://gist.github.com/natescherer/7ca0b83966d78656c800de79b0aba983)
+[![Tests Windows](https://natescherer.github.io/changelog-management-action/testreports/Windows/Windows_badge.svg)](https://natescherer.github.io/changelog-management-action/testreports/Windows/Windows.html)
+[![Tests Linux](https://natescherer.github.io/changelog-management-action/testreports/Linux/Linux_badge.svg)](https://natescherer.github.io/changelog-management-action/testreports/Linux/Linux.html)
+[![Tests macOS](https://natescherer.github.io/changelog-management-action/testreports/macOS/macOS_badge.svg)](https://natescherer.github.io/changelog-management-action/testreports/macOS/macOS.html)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
