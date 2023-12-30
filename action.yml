@@ -15,6 +15,10 @@ inputs:
   releaseVersion:
     description:  Version number to use when updating a changelog for release. Only valid for mode `release`.
     required: false
+  linkMode:
+    description: Link mode. Should be either `GitHub` or `None`. Only valid for `release`
+    required: false
+    default: GitHub
   changeType:
     description: Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`.
     required: false
@@ -41,6 +45,7 @@ runs:
         INPUT_RELEASEVERSION: ${{ inputs.releaseVersion }}
         INPUT_CHANGETYPE: ${{ inputs.changeType }}
         INPUT_CHANGEVALUE: ${{ inputs.changeValue }}
+        INPUT_LINKMODE: ${{ inputs.linkMode }}
     - name: Install Module
       id: installmodule
       run: . "$env:GITHUB_ACTION_PATH\src\steps\2_installmodule.ps1"
@@ -77,6 +82,7 @@ runs:
         INPUT_RELEASEVERSION: ${{ inputs.releaseVersion }}
         INPUT_CHANGETYPE: ${{ inputs.changeType }}
         INPUT_CHANGEVALUE: ${{ inputs.changeValue }}
+        INPUT_LINKMODE: ${{ inputs.linkMode }}
     - name: Read Data
       id: readdata
       run: . "$env:GITHUB_ACTION_PATH\src\steps\5_readdata.ps1"

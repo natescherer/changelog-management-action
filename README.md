@@ -60,6 +60,7 @@ It is tested and runs on `windows-latest`, `ubuntu-latest`, and `macos-latest`.
 | `path` | false | CHANGELOG.md | Path to relative to the root of the project to a CHANGELOG.md file in Keep a Changelog 1.0.0 format. Defaults to CHANGELOG.md in the root of the project. |
 | `mode` | false | readdata | Mode for the action. Should be one of `readdata`, `release`, or `addchange`. Defaults to `readdata`. |
 | `releaseVersion` | false |  | Version number to use when updating a changelog for release. Only valid for mode `release`. |
+| `linkMode` | false | GitHub | Link mode. Should be either `GitHub` or `None`. Only valid for `release` |
 | `changeType` | false |  | Type of change to add. Should be one of `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, or `Security`. Only valid for mode `addchange`. |
 | `changeValue` | false |  | Data for the change to add. Should be a single line string.  Only valid for mode `addchange`. |
 

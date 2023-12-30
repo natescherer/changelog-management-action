@@ -14,3 +14,7 @@ if (($env:INPUT_MODE -eq "release") -and (!$env:INPUT_RELEASEVERSION)) {
     Write-Host "Mode 'release' requires input 'releaseVersion'."
     throw "Input validation error."
 }
+if (($env:INPUT_MODE -eq "release") -and (!$env:INPUT_LINKMODE) -and ($env:INPUT_LINKMODE -eq "GitHub" -or $env:INPUT_LINKMODE -eq "None")) {
+    Write-Host "Mode 'release' requires input 'linkMode'."
+    throw "Input validation error."
+}
