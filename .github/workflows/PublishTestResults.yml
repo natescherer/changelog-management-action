@@ -65,7 +65,7 @@ jobs:
           page_name: ${{ runner.os }}
           page_badge_label: ${{ runner.os }}
       - name: Upload Pages Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ runner.os }}
           path: ${{ steps.pester.outputs.pages_path }}
